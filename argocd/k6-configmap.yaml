@@ -1,0 +1,15 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k6-test-script
+  namespace: default
+data:
+  k6-test.js: |
+    import http from 'k6/http';
+    import { sleep } from 'k6';
+
+    export default function () {
+      http.get('http://my-app.default.svc.cluster.local');
+      sleep(1);
+    }

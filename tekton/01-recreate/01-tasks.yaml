@@ -1,0 +1,76 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: apply-manifests
+spec:
+  params:
+    - name: manifest
+      description: The Kubernetes manifest to apply
+      type: string
+  steps:
+    - name: apply-manifest
+      image: bitnami/kubectl:latest
+      script: |
+        #!/bin/sh
+        echo "$(params.manifest)" | kubectl apply -f -
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: update-image
+spec:
+  params:
+    - name: deployment-name
+      description: The name of the deployment to update
+      type: string
+    - name: image
+      description: The new image to use
+      type: string
+    - name: container-name
+      description: The name of the container to update
+      type: string
+  steps:
+    - name: update-image
+      image: bitnami/kubectl:latest
+      script: |
+        #!/bin/sh
+        kubectl set image deployment/$(params.deployment-name) $(params.container-name)=$(params.image)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: create-configmap
+spec:
+  params:
+    - name: configmap-name
+      description: The name of the ConfigMap to create
+      type: string
+    - name: file-path
+      description: The path to the file to be added to the ConfigMap
+      type: string
+    - name: namespace
+      description: The namespace to create the ConfigMap in
+      type: string
+      default: default
+  steps:
+    - name: create-configmap
+      image: bitnami/kubectl:latest
+      script: |
+        #!/bin/sh
+        kubectl create configmap $(params.configmap-name) --from-file=$(params.file-path) -n $(params.namespace)
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-k6-test
+spec:
+  params:
+    - name: manifest
+      description: The Kubernetes manifest to apply
+      type: string
+  steps:
+    - name: run-k6-test
+      image: bitnami/kubectl:latest
+      script: |
+        #!/bin/sh
+        echo "$(params.manifest)" | kubectl apply -f -

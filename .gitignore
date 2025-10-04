@@ -1,0 +1,49 @@
+*.iml
+.idea/
+target/
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.log
+ERRORS.md
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+infra/.terraform/
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/.terraform.tfstate.lock.info
+*.hcl
+*.md
+dist
+node_modules
+.env
+
+# Logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+.DS_Store
+
+# Task files
+# tasks.json
+# tasks/
+.taskmaster
+.cursor
+
+.gemini
