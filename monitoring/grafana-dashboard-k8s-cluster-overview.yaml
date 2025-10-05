@@ -6,24 +6,6 @@ metadata:
 data:
   k8s-cluster-overview.json: |
     {
-      "__inputs": [
-        {
-          "name": "prometheus",
-          "label": "cadvisor",
-          "description": "",
-          "type": "datasource",
-          "pluginId": "prometheus",
-          "pluginName": "Prometheus"
-        },
-        {
-          "name": "DS_PROMETHEUS",
-          "label": "Prometheus",
-          "description": "",
-          "type": "datasource",
-          "pluginId": "prometheus",
-          "pluginName": "Prometheus"
-        }
-      ],
       "__elements": {},
       "__requires": [
         {
@@ -956,7 +938,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "builder",
-              "expr": "sum by(id) (rate(container_network_receive_bytes_total{instance=~\"..+\", id=\"/\", interface=~\"..+\"}[$__rate_interval]))",
+              "expr": "sum by(id) (rate(container_network_receive_bytes_total{instance=~\"..+\", id=\" /\", interface=~\"..+\"}[$__rate_interval]))",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -967,7 +949,7 @@ data:
                 "uid": "prometheus"
               },
               "editorMode": "builder",
-              "expr": "sum by(id) (rate(container_network_transmit_bytes_total{instance=~\"..+\", id=\"/\", interface=~\"..+\"}[$__rate_interval]))",
+              "expr": "sum by(id) (rate(container_network_transmit_bytes_total{instance=~\"..+\", id=\" /\", interface=~\"..+\"}[$__rate_interval]))",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,

@@ -21,3 +21,4 @@ minikube stop && minikube delete --all
 ```sh
 docker system prune -af
 ````
+
