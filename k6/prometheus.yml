@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: k6
+    metrics_path: /metrics
+
+    # This target uses the host machine's IP (accessible via host.containers.internal
+    # within the Docker network) where k6 will run an optional Prometheus exporter,
+    # though k6 uses Remote Write directly in your setup, keeping this is harmless.
+
+    static_configs:
+      - targets: ['host.containers.internal:9464']

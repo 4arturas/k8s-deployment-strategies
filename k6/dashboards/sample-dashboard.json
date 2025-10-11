@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": { "type": "grafana", "uid": "grafana" },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "type": "text",
+      "title": "Hello, Grafana!",
+      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 0 },
+      "options": { "mode": "markdown", "content": "# It works! 🎉\nThis dashboard was provisioned from JSON." }
+    }
+  ],
+  "schemaVersion": 39,
+  "style": "dark",
+  "tags": [ "provisioned" ],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Sample Dashboard",
+  "uid": "sample",
+  "version": 1
+}
