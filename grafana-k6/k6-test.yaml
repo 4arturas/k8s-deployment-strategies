@@ -1,0 +1,18 @@
+
+apiVersion: k6.io/v1alpha1
+kind: TestRun
+metadata:
+  name: my-k6-experiment
+spec:
+  parallelism: 1
+  script:
+    configMap:
+      name: my-k6-test-script
+      file: test.js
+  runner:
+    # replicas: 2
+    image: grafana/k6:latest
+    env:
+    - name: K6_PROMETHEUS_RW_SERVER_URL
+      value: http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/write
+  arguments: --out experimental-prometheus-rw

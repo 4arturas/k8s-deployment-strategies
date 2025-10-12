@@ -5,6 +5,6 @@ datasources:
     type: prometheus
     access: proxy
     isDefault: true
-    url: http://prometheus:9090
+    url: http://host.docker.internal:9999
     jsonData:
       httpMethod: POST

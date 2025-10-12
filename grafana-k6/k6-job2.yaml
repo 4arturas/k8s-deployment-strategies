@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k6-load-test2
+spec:
+  template:
+    spec:
+      containers:
+        - name: k6
+          image: grafana/k6:latest
+          env:
+          - name: K6_PROMETHEUS_RW_SERVER_URL
+            value: http://monitoring-kube-prometheus-prometheus.monitoring.svc.cluster.local:9090/api/v1/write
+          command:
+            - k6
+            - run
+            - --out
+            - experimental-prometheus-rw
+            - /scripts/script2.js
+          volumeMounts:
+            - name: k6-script
+              mountPath: /scripts
+      restartPolicy: Never
+      volumes:
+        - name: k6-script
+          configMap:
+            name: k6-script2
+  backoffLimit: 0

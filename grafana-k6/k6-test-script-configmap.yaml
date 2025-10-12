@@ -1,0 +1,30 @@
+# k6-test-script-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-k6-test-script
+data:
+  test.js: |
+    // Paste your k6 test.js content here
+    import http from 'k6/http';
+    import { sleep, check } from 'k6';
+
+    export let options = {
+      stages: [
+        { duration: '30s', target: 20 },
+        { duration: '1m', target: 20 },
+        { duration: '20s', target: 0 },
+      ],
+      thresholds: {
+        http_req_duration: ['p(99)<1500'],
+        'http_req_failed{status:400}': ['rate<0.1'],
+      },
+    };
+
+    export default function () {
+      let res = http.get('http://petclinic.monitoring.svc.cluster.local:80');
+      check(res, {
+        'is status 200': (r) => r.status === 200,
+      });
+      sleep(1);
+    }
