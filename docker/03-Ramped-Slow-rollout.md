@@ -1,15 +1,10 @@
 # Ramped / Slow Rollout Deployment Strategy
 
 @startuml
-
 title Ramped / Slow Rollout: gradual with pauses
-
 "[app-v1]" --> "[app-v1 + app-v2]" : add new pods slowly
-
 "[app-v1 + app-v2]" --> "[pause]" : manual/metric check
-
 "[pause]" --> "[app-v2]" : continue rollout
-
 @enduml
 
 ---
